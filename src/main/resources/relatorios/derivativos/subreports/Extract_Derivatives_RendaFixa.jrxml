@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Extract_Derivatives_RendaFixa" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cf09dc65-abb7-4a9f-8c35-9111f8184e4a">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="357"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DATA" class="java.util.Date"/>
+	<field name="mercadoria" class="java.lang.String"/>
+	<field name="indexador" class="java.lang.String"/>
+	<field name="dtEmissao" class="java.util.Date"/>
+	<field name="dtVcto" class="java.util.Date"/>
+	<field name="vlrBase" class="java.lang.String"/>
+	<field name="taxaOpe" class="java.lang.String"/>
+	<field name="taxa252" class="java.lang.String"/>
+	<field name="taxa360" class="java.lang.String"/>
+	<field name="perc" class="java.lang.String"/>
+	<field name="qtde" class="java.lang.String"/>
+	<field name="ajusteFiscal" class="java.lang.String"/>
+	<field name="ajusteMTM" class="java.lang.String"/>
+	<field name="irProv" class="java.lang.Double"/>
+	<variable name="SomaVlrBase" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{vlrBase})]]></variableExpression>
+	</variable>
+	<variable name="SomaAjusteFiscal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{ajusteFiscal})]]></variableExpression>
+	</variable>
+	<variable name="SomaAjusteMTM" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{ajusteMTM})]]></variableExpression>
+	</variable>
+	<variable name="SomaIrProv" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{irProv})]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="18" width="125" height="10" uuid="33b95593-151e-4c68-9812-548a3ee863dc"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operações de Renda Fixa (BRL)]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="422" y="18" width="71" height="10" uuid="327fbfac-ff92-4dc5-b86b-84d61ee3f829"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DATA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="356" y="18" width="66" height="10" uuid="4035e239-52b6-42f3-8072-2f82705af1b2"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Posição:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="14" forecolor="#000000" backcolor="#CCCCCC" uuid="3a6ac885-935a-4f61-b5fd-9726248a6262"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="541" y="3" width="45" height="10" uuid="8f7b9baf-c7c1-42ea-ae26-319c838b2330"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="3" width="52" height="10" uuid="b4e2f643-33c8-48fe-a71f-38e5db811ddc"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Ajuste Fiscal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="3" width="44" height="10" uuid="64bb219b-d437-46cb-a5da-cfcf88ccedc9"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Taxa Oper]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="3" width="67" height="10" uuid="7eef6134-1e22-408a-a97c-95113e6e49a4"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Data Vencimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="764" y="3" width="32" height="10" uuid="bf94f2de-ad8f-4922-803e-83814184c51b"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[IR Prov]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="3" width="43" height="10" uuid="643024a0-5a70-421e-83e9-f813d6de4746"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Valor Base]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="689" y="3" width="49" height="10" uuid="8fc85ec9-e3f5-4a28-adb5-08c0865a5deb"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Ajuste MTM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="3" width="55" height="10" uuid="cb1b1e79-a348-4962-a060-a23b3441a747"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Data Emissão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="3" width="39" height="10" uuid="f42a1b5a-60af-4be4-ba7b-6de23caf7253"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Indexador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="3" width="46" height="10" uuid="f894b84c-e113-426f-a911-d582cf4c737e"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mercadoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="3" width="35" height="10" uuid="0d6c5ce8-ca98-4b77-807e-9e927606b526"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Taxa 360]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="3" width="35" height="10" uuid="83894bc9-d039-47c7-83d2-beabf013a173"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Taxa 252]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="3" width="44" height="10" uuid="be4651d4-68e5-4947-bf76-2d37cc6e07b3"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Percentual]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="2" y="1" width="71" height="10" uuid="68f09b1a-e73f-4b1d-940b-84e812b8d1f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{mercadoria} != null) ? $F{mercadoria} : "-"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="76" y="1" width="71" height="10" isPrintWhenDetailOverflows="true" uuid="da692938-2661-42c7-b8ac-4d2e79b93b90"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{indexador} != null) ? $F{indexador} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="150" y="1" width="42" height="10" uuid="f17268f1-cb2f-4bf1-98de-441c0168f4fe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dtEmissao} != null) ? $F{dtEmissao} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="215" y="1" width="42" height="10" uuid="751e4f00-3cfd-4079-afb9-fad964266613"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dtVcto} != null) ? $F{dtVcto} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="270" y="1" width="75" height="10" isPrintWhenDetailOverflows="true" uuid="7c908755-8502-488d-bb1c-7cb790424cd9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{vlrBase} != null) ? new java.math.BigDecimal($F{vlrBase}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0000" isBlankWhenNull="true">
+				<reportElement x="347" y="1" width="35" height="10" isPrintWhenDetailOverflows="true" uuid="01d4245a-239c-433d-b631-0d44f51c3ba1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{taxaOpe} != null) ? new java.math.BigDecimal($F{taxaOpe}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="485" y="1" width="42" height="10" uuid="fa74bd37-4997-4b56-92f4-05c8e178af85"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{perc} != null) ? new java.math.BigDecimal($F{perc}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0000" isBlankWhenNull="true">
+				<reportElement x="440" y="1" width="32" height="10" uuid="a7aabe25-238f-4635-8599-4eec21395e08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{taxa360} != null) ? new java.math.BigDecimal($F{taxa360}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="532" y="1" width="63" height="10" isPrintWhenDetailOverflows="true" uuid="32c82da2-eea5-408d-aea8-e1b1797491e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{qtde} != null) ? new java.math.BigDecimal($F{qtde}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="597" y="1" width="75" height="10" uuid="011fccb6-91af-47b4-8f31-3bdfeb4d4b67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ajusteFiscal} != null) ? new java.math.BigDecimal($F{ajusteFiscal}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="675" y="1" width="75" height="10" isPrintWhenDetailOverflows="true" uuid="fd87a5cb-9be7-4d0c-a4c7-88778095fa5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ajusteMTM} != null) ? new java.math.BigDecimal($F{ajusteMTM}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0000" isBlankWhenNull="true">
+				<reportElement x="397" y="1" width="32" height="10" isPrintWhenDetailOverflows="true" uuid="d8926f00-0379-40a1-babb-78daa02603e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{taxa252} != null) ? new java.math.BigDecimal($F{taxa252}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="753" y="1" width="49" height="10" isPrintWhenDetailOverflows="true" uuid="b1c025df-f2ec-4635-9c43-951fe606f898"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{irProv} != null) ? new java.math.BigDecimal($F{irProv}) : "-"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="14">
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="270" y="2" width="75" height="10" uuid="988382d9-1d4b-43e4-8e07-ed6a987df3a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaVlrBase} != null) ? $V{SomaVlrBase} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="597" y="2" width="75" height="10" uuid="4fce3174-19bf-4c49-a7bb-5626cf29c125"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaAjusteFiscal} != null) ? $V{SomaAjusteFiscal} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="675" y="2" width="75" height="10" isPrintWhenDetailOverflows="true" uuid="8508152c-6849-4058-a120-d16f0e5cd238"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaAjusteMTM} != null) ? $V{SomaAjusteMTM} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="753" y="2" width="49" height="10" isPrintWhenDetailOverflows="true" uuid="84b6baec-9f59-4654-9a47-518adfe0fce8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaIrProv} != null) ? $V{SomaIrProv} : "-"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="270" y="1" width="75" height="1" uuid="87fb0fd6-0c13-4e58-a07b-b09b680d4fd1"/>
+			</line>
+			<line>
+				<reportElement x="270" y="12" width="75" height="1" uuid="12e3b77b-998d-4320-9318-a15e0c68208a"/>
+			</line>
+			<line>
+				<reportElement x="597" y="1" width="75" height="1" uuid="4684fbe7-859c-41c9-a188-689f31439a0c"/>
+			</line>
+			<line>
+				<reportElement x="597" y="12" width="75" height="1" uuid="391c20db-1c18-461a-b40a-4a246744c6d2"/>
+			</line>
+			<line>
+				<reportElement x="675" y="1" width="75" height="1" uuid="57412da5-f0c0-4147-9b6f-ed4e30d9a836"/>
+			</line>
+			<line>
+				<reportElement x="675" y="12" width="75" height="1" uuid="8845242f-4ac0-4e92-bb2f-6f6856d3da77"/>
+			</line>
+			<line>
+				<reportElement x="753" y="1" width="49" height="1" uuid="7f8fec01-c8ae-47e7-83a0-61cbe0964295"/>
+			</line>
+			<line>
+				<reportElement x="753" y="12" width="49" height="1" uuid="b780a466-6d69-4416-845f-515f9e5ae7a0"/>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

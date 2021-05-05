@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Extract_Derivatives_NDF" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="596cc05f-939b-41df-aca8-87a94336b03b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DATA" class="java.util.Date"/>
+	<field name="nrContrato" class="java.lang.String"/>
+	<field name="vlrNotional" class="java.lang.String"/>
+	<field name="vlrBase" class="java.lang.String"/>
+	<field name="dtInicio" class="java.util.Date"/>
+	<field name="dtVcto" class="java.util.Date"/>
+	<field name="moedaRef" class="java.lang.String"/>
+	<field name="cotTermo" class="java.lang.String"/>
+	<field name="taxPre252" class="java.lang.String"/>
+	<field name="posicao" class="java.lang.String"/>
+	<field name="fiscalParte" class="java.lang.String"/>
+	<field name="fiscalContraParte" class="java.lang.String"/>
+	<field name="ajusteFiscal" class="java.lang.String"/>
+	<field name="ajusteMTM" class="java.lang.String"/>
+	<variable name="SomaValorBase" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{vlrNotional})]]></variableExpression>
+	</variable>
+	<variable name="SomaValorBaseME" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{vlrBase})]]></variableExpression>
+	</variable>
+	<variable name="SomaFiscalParte" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{fiscalParte})]]></variableExpression>
+	</variable>
+	<variable name="SomaFiscalCP" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{fiscalContraParte})]]></variableExpression>
+	</variable>
+	<variable name="SomaAjusteFiscal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{ajusteFiscal})]]></variableExpression>
+	</variable>
+	<variable name="SomaAjusteMTM" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[new java.math.BigDecimal($F{ajusteMTM})]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="19" width="96" height="10" uuid="4541a3ff-2044-49fe-8736-41dc02ec191d"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operações de NDF (BRL)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="10" width="49" height="10" uuid="c335f541-37f5-4f1b-ba1b-d2baadb82fff"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Derivativos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="19" width="66" height="10" uuid="2a17e48b-689a-4ac3-b075-4394138240d7"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Posição:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="425" y="19" width="64" height="10" uuid="e0db5e5e-8d2e-49a8-8506-b6754dbb94ac"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DATA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="14" forecolor="#000000" backcolor="#CCCCCC" uuid="1714f933-18bc-4e45-a803-2fe2b2dadf8f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="506" y="3" width="49" height="10" uuid="3793c834-c4c7-4c30-9ff6-e2e8a14ae12f"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fiscal Parte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="3" width="42" height="10" uuid="9ffe2fb2-c3ad-4709-9269-2e8085af65d6"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Data Vcto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="571" y="3" width="71" height="10" uuid="02483f59-8e27-4f3a-b0a2-daaf7572bdf5"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fiscal Contraparte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="3" width="48" height="10" uuid="14620482-dc2d-4b04-bb3b-9faeae5d1ce3"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[No Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="3" width="42" height="10" uuid="5d699d94-9c12-4e9b-9075-ec4a336f2367"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Valor Base]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="657" y="3" width="52" height="10" uuid="68db9310-1ee2-41aa-9651-fc2410402569"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Ajuste Fiscal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="213" y="3" width="42" height="10" uuid="635db0cf-c4b1-405d-9b9c-dc37cccdcbfa"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Data Início]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="737" y="3" width="49" height="10" uuid="01335b9c-b748-4bba-98c7-a22360116c42"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Ajuste MTM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="3" width="14" height="10" uuid="ac95d35d-9f05-4a14-932f-cd265477df67"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[C/V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="3" width="37" height="10" uuid="69d6f314-0eff-4d5d-a189-33f254d9bc9e"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Taxa Pré]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="3" width="30" height="10" uuid="45bda5d0-6b41-4792-8f98-e03736284c7a"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ME Ref]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="3" width="49" height="10" uuid="c973ed8d-204b-41a4-8a7f-fc0e410f21a2"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Taxa Termo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="3" width="62" height="10" uuid="250da1fe-3f28-48f8-9a05-575946c7393c"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Valor Base (ME)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="1" width="45" height="10" uuid="99beaf31-f07a-4df5-8125-4d0ba7d08277"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph tabStopWidth="45"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{nrContrato} != null) ? $F{nrContrato} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="52" y="1" width="75" height="10" uuid="91d3c8ec-0a45-4881-a950-06dbc96419b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{vlrNotional} != null) ? new java.math.BigDecimal($F{vlrNotional}): "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="265" y="1" width="42" height="10" uuid="721b3ec0-10c8-42ae-b039-91b656372336"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dtVcto} != null) ? $F{dtVcto} : "-"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="309" y="1" width="63" height="10" isPrintWhenDetailOverflows="true" uuid="b430c605-7c39-468f-99e1-3ceadb1f7e5c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{moedaRef} != null) ? $F{moedaRef} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0000;(###0.0000)" isBlankWhenNull="true">
+				<reportElement x="430" y="1" width="40" height="10" uuid="826f47f9-0ff2-4083-bd02-5cd53f5a3e57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{taxPre252} != null) ? new java.math.BigDecimal($F{taxPre252}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="476" y="1" width="14" height="10" uuid="fc6557b8-4235-411f-ac8e-dedeb08b5763"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{posicao} != null) ? $F{posicao} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="571" y="1" width="70" height="10" uuid="439e0d28-c13c-4760-9983-3cd81431c75e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fiscalContraParte} != null) ? new java.math.BigDecimal($F{fiscalContraParte}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="644" y="1" width="75" height="10" uuid="051c38e5-315b-4223-bf7b-a4fa5e0efc49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ajusteFiscal} != null) ? new java.math.BigDecimal($F{ajusteFiscal}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="722" y="1" width="75" height="10" uuid="dc0595b9-6ee2-4bd9-9b0e-94dd8b604e0f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ajusteMTM} != null) ? new java.math.BigDecimal($F{ajusteMTM}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="212" y="1" width="42" height="10" uuid="9f53eeba-bd75-41e4-a3cd-d774d961e8e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dtInicio} != null) ? $F{dtInicio} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="129" y="1" width="75" height="10" uuid="87450add-da01-43f4-9cd7-025b17594d20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{vlrBase} != null) ? new java.math.BigDecimal($F{vlrBase}): "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="491" y="1" width="77" height="10" uuid="777c5e5a-fe4f-4cf7-ae72-f083eb9faf73"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fiscalParte} != null) ? new java.math.BigDecimal($F{fiscalParte}) : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000000;(#,##0.000000)" isBlankWhenNull="true">
+				<reportElement x="376" y="1" width="40" height="10" uuid="eef3e279-743f-459d-af7c-26deddb255df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{cotTermo} != null) ? new java.math.BigDecimal($F{cotTermo}) : "-"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="16">
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="52" y="2" width="75" height="10" uuid="e0508b55-b3d0-4f10-b5b0-8a5c6b003266"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaValorBase} != null) ? $V{SomaValorBase} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="129" y="2" width="75" height="10" uuid="cb291571-485c-47db-b249-8f3cef96d0b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaValorBaseME} != null) ? $V{SomaValorBaseME} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="491" y="2" width="77" height="10" uuid="c40c3e14-5be1-4654-a10b-36673d3b5537"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaFiscalParte} != null) ? $V{SomaFiscalParte} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="571" y="2" width="70" height="10" uuid="911f4b5b-ecb4-4c82-aa0d-548ffe71b2bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaFiscalCP} != null) ? $V{SomaFiscalCP} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="644" y="2" width="75" height="10" uuid="1b997b7c-6be6-4ff9-b3cc-af287dc9237a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaAjusteFiscal} != null) ? $V{SomaAjusteFiscal} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="722" y="2" width="75" height="10" uuid="191c653d-1e22-4205-8823-73a1fba08551"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{SomaAjusteMTM} != null) ? $V{SomaAjusteMTM} : "-"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="52" y="1" width="75" height="1" uuid="f59562ba-d9c9-4b0c-9458-15c432ec2a02"/>
+			</line>
+			<line>
+				<reportElement x="52" y="12" width="75" height="1" uuid="449e9b14-925e-4c2a-af78-00c36c32d0ba"/>
+			</line>
+			<line>
+				<reportElement x="129" y="1" width="75" height="1" uuid="3a411895-a1fc-48f2-b152-8a68e0b0af8e"/>
+			</line>
+			<line>
+				<reportElement x="129" y="12" width="75" height="1" uuid="a1799b1d-c984-4ac0-b99b-be58bab9fa6b"/>
+			</line>
+			<line>
+				<reportElement x="491" y="1" width="77" height="1" uuid="211abe76-5456-4428-832d-da938ffb5f8a"/>
+			</line>
+			<line>
+				<reportElement x="491" y="12" width="77" height="1" uuid="986673aa-d03b-4489-a9e0-cdd2101c5b2d"/>
+			</line>
+			<line>
+				<reportElement x="571" y="1" width="70" height="1" uuid="a49432ca-6938-46ed-bfc7-4283ce53d00c"/>
+			</line>
+			<line>
+				<reportElement x="571" y="12" width="70" height="1" uuid="d8bafe4f-b998-4968-82b5-e3fadde4766c"/>
+			</line>
+			<line>
+				<reportElement x="644" y="1" width="75" height="1" uuid="cf819302-16b6-451b-987a-6bbaded93eb7"/>
+			</line>
+			<line>
+				<reportElement x="644" y="12" width="75" height="1" uuid="3133b46f-f3ac-461b-945e-5a29235f8a8c"/>
+			</line>
+			<line>
+				<reportElement x="722" y="1" width="75" height="1" uuid="7bbf134d-ee29-4fdc-837b-da48950fca86"/>
+			</line>
+			<line>
+				<reportElement x="722" y="12" width="75" height="1" uuid="783e1681-da01-4f31-96e5-e4d30030adad"/>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

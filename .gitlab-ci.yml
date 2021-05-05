@@ -1,0 +1,86 @@
+image: docker:latest
+
+cache:
+  paths:
+    - .m2/repository
+ 
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay
+  SPRING_PROFILES_ACTIVE: gitlab-ci, test
+  MAVEN_CLI_OPTS: "-s ci_settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
+.default_tags: &default_tags
+  tags:
+    - java
+
+clean:
+  <<: *default_tags
+  image: maven:3.6.3-openjdk-11
+  stage: build
+  script: mvn $MAVEN_CLI_OPTS clean
+
+build:
+  <<: *default_tags
+  image: maven:3.6.3-openjdk-11
+  stage: build
+  script: mvn $MAVEN_CLI_OPTS compile
+
+test:
+  <<: *default_tags
+  image: maven:3.6.3-openjdk-11
+  stage: test
+  script: mvn $MAVEN_CLI_OPTS clean test
+
+package:
+  <<: *default_tags
+  image: maven:3.6.3-openjdk-11
+  stage: package
+  script: mvn $MAVEN_CLI_OPTS package -Dmaven.test.skip=true
+  artifacts:
+    paths:
+      - target/*.war
+  only:
+    - master
+
+deployTomcat:
+  <<: *default_tags
+  image: maven:3.6.3-openjdk-11
+  stage: deploy
+  script: "mvn $MAVEN_CLI_OPTS tomcat7:redeploy -Dmaven.test.skip=true"
+  artifacts:
+    paths:
+      - target/*.war
+  only:
+    - master
+
+deployNexus:
+  <<: *default_tags
+  image: maven:3.6.3-openjdk-11
+  stage: deploy
+  script: "mvn $MAVEN_CLI_OPTS deploy -Dmaven.test.skip=true"
+  artifacts:
+    paths:
+      - target/*.war
+  only:
+    - master
+
+deployManual:
+  <<: *default_tags
+  image: maven:3.6.3-openjdk-11
+  stage: deploy
+  script: "mvn $MAVEN_CLI_OPTS tomcat7:redeploy -Dmaven.test.skip=true"
+  artifacts:
+    paths:
+      - target/*.war
+  when: manual
+

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Extract_Derivatives_Termos" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryNewPage="true" uuid="48ff68a3-4b48-4e4c-8675-efa3c1485688">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="359"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DATA" class="java.util.Date"/>
+	<field name="posicao" class="java.lang.String"/>
+	<field name="dataInicio" class="java.util.Date"/>
+	<field name="dataVencto" class="java.util.Date"/>
+	<field name="mercadoria" class="java.lang.String"/>
+	<field name="unidadeNegociacao" class="java.lang.String"/>
+	<field name="bolsaReferencia" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Integer"/>
+	<field name="precoOperacao" class="java.lang.Double"/>
+	<field name="moeda" class="java.lang.String"/>
+	<field name="cotacaoSpot" class="java.lang.Double"/>
+	<field name="contrato" class="java.lang.String"/>
+	<field name="valorMTM" class="java.lang.Double"/>
+	<variable name="SomaQuantidade" class="java.lang.Number" resetType="Group" resetGroup="GroupMercadoriaPos" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="SomaValorIR" class="java.lang.Number" resetType="Group" resetGroup="GroupMercadoriaPos" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorMTM}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="SomaValorMTM" class="java.lang.Number" resetType="Group" resetGroup="GroupMercadoriaPos" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorMTM}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="GroupMercadoriaPos">
+		<groupExpression><![CDATA[$F{posicao} + " " + $F{mercadoria}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="25">
+				<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" x="372" y="2" width="60" height="10" uuid="207abb4f-735a-48ed-a5c0-54a9827dec91"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SomaQuantidade} != null) ? $V{SomaQuantidade} : "-"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="372" y="12" width="60" height="1" uuid="1575cbf3-1acb-4a03-9f5c-3fea60ffc00b"/>
+				</line>
+				<line>
+					<reportElement x="372" y="1" width="60" height="1" uuid="efec6fce-f08c-4cb0-96e4-8e7a8b1431c4"/>
+				</line>
+				<line>
+					<reportElement x="723" y="12" width="78" height="1" uuid="1962c1f7-388a-4509-b089-14da5916c686"/>
+				</line>
+				<line>
+					<reportElement x="723" y="1" width="78" height="1" uuid="e7c238a5-4404-4fb2-b65f-41011eef1723"/>
+				</line>
+				<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="723" y="2" width="78" height="10" uuid="f4d40861-e6c4-4396-8324-6ec9fbea45c0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SomaValorMTM} != null) ? $V{SomaValorMTM} : "-"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="423" y="19" width="72" height="10" uuid="a841ea8a-e02b-4bb9-9066-6866e0c86f76"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DATA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="47" height="10" uuid="9fbd0e13-8efc-4bbe-95b7-95394b9f85b8"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Derivativos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="19" width="169" height="10" uuid="703ab268-db4b-4858-82a9-95ead2054661"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operações de Termo de Mercadoria (BRL)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="357" y="19" width="67" height="10" uuid="ff4e99d5-bed6-4987-a4ef-3fd829e4e745"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Posição:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="14" forecolor="#000000" backcolor="#CCCCCC" uuid="22682afc-6912-4b54-b6da-d9190dbc7bf7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="738" y="3" width="46" height="10" uuid="088178d9-a8fe-4f29-ab96-489123883d66"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Valor MTM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="662" y="3" width="49" height="10" uuid="f6cd9f73-416f-47d9-8f34-b04e710434be"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[No. Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="586" y="3" width="57" height="10" uuid="d0e1fa8e-e5bc-431a-af9e-2bc14cc228ab"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cotação Inicial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="3" width="27" height="10" uuid="73f9be41-dfcb-482b-8c73-ee07d8db0197"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Bolsa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="3" width="38" height="10" uuid="691bb0c4-41a6-4978-82b7-25a4163ac194"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Dt Vencto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="3" width="62" height="10" uuid="ce82ef37-69a9-446e-9892-0f0208d64d04"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Posição Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="3" width="37" height="10" uuid="bbf09990-7a8e-4968-9061-75ef2eb789b9"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Dt Início]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="3" width="48" height="10" uuid="93cc6b2a-1f46-428c-aaee-ebd3bb6f8b62"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mercadoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="3" width="47" height="10" uuid="5a455cdc-9ee9-4d77-b123-7f215849085a"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="3" width="42" height="10" uuid="cbd31429-ee1d-4311-af3d-33d40dc5b9d8"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Unid. Neg.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="3" width="56" height="10" uuid="2d9471de-736e-4081-9793-244a97e5930d"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cotação FWD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="521" y="3" width="51" height="10" uuid="c72a0ec1-ca85-4796-8317-8c96b97903ee"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Moeda Conv.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="1" width="72" height="10" uuid="f8034067-63e6-4976-8685-ec8541f640a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{posicao} != null) ? $F{posicao} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="80" y="1" width="42" height="10" uuid="0f159f7e-abe0-4e04-abac-19c14385a52d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dataInicio} != null) ? $F{dataInicio} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="130" y="1" width="42" height="10" uuid="e40bf0b2-50d1-4f1c-85e8-a06400dac7bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dataVencto} != null) ? $F{dataVencto} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="178" y="1" width="72" height="10" uuid="01dcdfe4-cee6-48ba-a5fb-db2902f55374"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{mercadoria} != null) ? $F{mercadoria} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="255" y="1" width="55" height="10" uuid="2e60613f-0e4f-4f1c-af1c-9d0003c70dbf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{unidadeNegociacao} != null) ? $F{unidadeNegociacao} : "-"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="315" y="1" width="50" height="10" uuid="f3c257e5-08c6-4dfa-8df7-2e0d996d5356"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{bolsaReferencia} != null) ? $F{bolsaReferencia} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="372" y="1" width="60" height="10" uuid="bde70d44-6f99-4deb-8975-e813534ed21a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{quantidade} != null) ? $F{quantidade} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="440" y="1" width="67" height="10" uuid="91389956-28a2-4893-b77e-26c15a4e0336"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{precoOperacao} != null) ? $F{precoOperacao} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="516" y="1" width="60" height="10" uuid="9e4fc872-24f3-407d-93c5-956c552a7e3c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{moeda} != null) ? $F{moeda} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000000;(#,##0.000000)" isBlankWhenNull="true">
+				<reportElement x="584" y="1" width="60" height="10" uuid="b263f9ee-ec8a-47df-9d8b-e68ea429b826"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{cotacaoSpot} != null) ? $F{cotacaoSpot} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="652" y="1" width="65" height="10" uuid="799d2aed-5bc7-43bf-af2b-40b11b887413"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{contrato} != null) ? $F{contrato} : "-"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement x="723" y="1" width="78" height="10" uuid="5cab641d-7d27-4017-b034-90093dc67253"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{valorMTM} != null) ? $F{valorMTM} : "-"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

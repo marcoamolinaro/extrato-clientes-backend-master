@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Extract_Derivatives_Report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoPages" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="94a1f8aa-fc92-4d1c-bd18-86452d9e5466">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="241"/>
+	<parameter name="mainReport" class="java.util.List"/>
+	<parameter name="listaSwap" class="java.util.List"/>
+	<parameter name="swapReport" class="java.io.InputStream"/>
+	<parameter name="ndfReport" class="java.io.InputStream"/>
+	<parameter name="rendaFixaReport" class="java.io.InputStream"/>
+	<parameter name="listaNDF" class="java.util.List"/>
+	<parameter name="listaRendaFixa" class="java.util.List"/>
+	<parameter name="listaCallTitularOpcoes" class="java.util.List"/>
+	<parameter name="callTitularReport" class="java.io.InputStream"/>
+	<parameter name="listaTermos" class="java.util.List"/>
+	<parameter name="termosReport" class="java.io.InputStream"/>
+	<parameter name="NM_CLI" class="java.lang.String"/>
+	<parameter name="CD_CLI_BR" class="java.lang.Integer"/>
+	<parameter name="DATA" class="java.util.Date"/>
+	<parameter name="URL_LOGO" class="java.io.InputStream"/>
+	<parameter name="URL_LOGO_AUX" class="java.io.InputStream"/>
+	<parameter name="ENDERECO" class="java.lang.String"/>
+	<parameter name="ESTADO" class="java.lang.String"/>
+	<parameter name="CEP" class="java.lang.String"/>
+	<parameter name="listaSwapFluxo" class="java.util.List"/>
+	<parameter name="swapFluxoReport" class="java.io.InputStream"/>
+	<parameter name="opcoesReport" class="java.io.InputStream"/>
+	<parameter name="termosCompradorReport" class="java.io.InputStream"/>
+	<parameter name="termosVendedorReport" class="java.io.InputStream"/>
+	<parameter name="listaTermosComprador" class="java.util.List"/>
+	<parameter name="listaTermosVendedor" class="java.util.List"/>
+	<parameter name="listaOpcoes" class="java.util.List"/>
+	<parameter name="listTermos" class="java.util.List"/>
+	<parameter name="CNPJ" class="java.lang.String"/>
+	<parameter name="listaCdbPenalty" class="java.util.List"/>
+	<parameter name="cdbPenaltyReport" class="java.io.InputStream"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="537" splitType="Stretch">
+			<staticText>
+				<reportElement x="212" y="214" width="35" height="13" uuid="fe6c9d1d-cb55-4400-9cd6-f19d04612220"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="229" width="35" height="13" uuid="4dc6b1b2-4530-467f-b649-f070d0a9b232"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Código:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="208" y="207" width="353" height="1" uuid="33b8fc00-b8ec-4ebd-923c-322215ab5c77"/>
+			</line>
+			<line>
+				<reportElement x="208" y="303" width="353" height="1" uuid="7a026a57-39e0-4b88-b994-311d7510c127"/>
+			</line>
+			<textField>
+				<reportElement x="263" y="214" width="298" height="13" uuid="cb9fed8d-1231-4600-b022-c7abba38c405"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_CLI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="263" y="229" width="298" height="13" uuid="682772b7-d3eb-4fad-8dbe-1d980a3916f5"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CD_CLI_BR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="212" y="259" width="46" height="13" uuid="4265cb1f-5792-4799-a239-f923b4339aaf"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="288" width="22" height="13" uuid="662abb2f-a4f4-4177-bcac-fb555053140f"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Cep:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="263" y="259" width="298" height="13" uuid="f6fb8ced-92ce-456c-b237-2165ff88bbc1"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ENDERECO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="264" y="273" width="297" height="13" uuid="038a9d5d-bf38-4d2f-9666-e807f0784de8"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ESTADO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="263" y="287" width="298" height="14" uuid="6d0638d0-f90b-4404-b835-e040e1b75f76"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CEP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="1" width="182" height="20" uuid="39e7097e-f869-43ec-b8da-0a62052e44bc"/>
+				<textElement markup="none">
+					<font fontName="Arial" size="14" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Posição de Investimentos]]></text>
+			</staticText>
+			<image scaleImage="RetainShape">
+				<reportElement positionType="FixRelativeToBottom" x="585" y="32" width="155" height="28" uuid="bc68e5b1-b5e2-40d4-9bdc-51c031867c5b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{URL_LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="2" y="33" width="223" height="10" uuid="1ce586ce-b400-42ff-bfff-411e2556e255"/>
+				<textElement markup="none">
+					<font fontName="Arial" size="8" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[*Este extrato reflete a visão do cliente sobre a operação.]]></text>
+			</staticText>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement x="264" y="244" width="297" height="13" uuid="98799daa-70a6-4565-9a0c-a52e5ad64b08"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CNPJ}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="212" y="245" width="35" height="13" uuid="5eb7cfdd-72e8-4e16-a9cc-d323a0ff2e34"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<image scaleImage="RetainShape">
+				<reportElement positionType="FixRelativeToBottom" x="748" y="0" width="53" height="53" uuid="c77cc01d-1b2e-496d-bb20-bae598b7b569">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{URL_LOGO_AUX}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="41">
+			<subreport isUsingCache="false" runToBottom="false">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="801" height="41" isRemoveLineWhenBlank="true" uuid="05719eb1-ee75-4227-92b8-348a8043b201"/>
+				<subreportParameter name="DATA">
+					<subreportParameterExpression><![CDATA[$P{DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{listaSwap})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{swapReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="41">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="801" height="41" isRemoveLineWhenBlank="true" uuid="996be553-858b-46b6-aac5-844b9fa81a8d"/>
+				<subreportParameter name="DATA">
+					<subreportParameterExpression><![CDATA[$P{DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{listaSwapFluxo})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{swapFluxoReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="41">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="802" height="41" isRemoveLineWhenBlank="true" uuid="4cbe3ddc-4676-4288-b1fa-3105d2570e44"/>
+				<subreportParameter name="DATA">
+					<subreportParameterExpression><![CDATA[$P{DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{listaTermos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{termosReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="41">
+			<subreport isUsingCache="false" runToBottom="false">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="801" height="41" isRemoveLineWhenBlank="true" uuid="7fac1fe1-1728-4fd9-adb5-35fdbae98a65"/>
+				<subreportParameter name="DATA">
+					<subreportParameterExpression><![CDATA[$P{DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{listaOpcoes})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{opcoesReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="41">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="801" height="41" isRemoveLineWhenBlank="true" uuid="52b84219-4276-480d-8fde-331d9b0cedc0"/>
+				<subreportParameter name="DATA">
+					<subreportParameterExpression><![CDATA[$P{DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{listaRendaFixa})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{rendaFixaReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="41">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="802" height="41" isRemoveLineWhenBlank="true" uuid="496f425d-88d4-4d89-9ddd-b2564b7500d2"/>
+				<subreportParameter name="DATA">
+					<subreportParameterExpression><![CDATA[$P{DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{listaNDF})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{ndfReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="41">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="801" height="41" isRemoveLineWhenBlank="true" uuid="f962bcdb-77ce-4fd2-bc37-6662fb3448fb"/>
+				<subreportParameter name="DATA">
+					<subreportParameterExpression><![CDATA[$P{DATA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{listaCdbPenalty})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{cdbPenaltyReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="18">
+			<break>
+				<reportElement x="0" y="15" width="209" height="1" uuid="40072f21-cd80-433b-b1a8-191fdb844e84"/>
+			</break>
+			<textField>
+				<reportElement x="667" y="0" width="119" height="15" uuid="49582c0d-92de-48d5-afda-c82df8c1e4ff"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="787" y="0" width="15" height="15" uuid="cea11c1a-9924-42bf-9747-c5dce71af4fb"/>
+				<textFieldExpression><![CDATA[+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="96">
+			<staticText>
+				<reportElement x="3" y="2" width="799" height="78" uuid="5c6c47b4-4fa5-489d-8e44-cdc9752f875b"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Deutsche Bank S.A. – Banco Alemão (“DB”) envia o presente Relatório de Posições de Investimentos somente para seu próprio uso interno. As metodologias de precificação utilizadas na elaboração deste documento representam nossas melhores avaliações econômicas das operações de derivativos vigentes no fechamento das datas especificadas. Tais precificações não representam nem as condições nem qualquer tipo de garantia de que novas operações ou instrumentos podem ser contratadas e nem os termos em que operações existentes podem ser liquidadas ou  vencidas antecipadamente. Tais precificações também podem ser alteradas para refletir as condições de  mercado, de liquidez, de crédito, operacional ou de outros riscos. O DB pode alterar a sua metodologia de precificação, ajustes e pressupostos considerados para tanto a qualquer momento, de modo que as futuras precificações poderão ser menos favoráveis do que as atualmente existentes, mesmo na ocorrência de condições adversas de mercado. As precificações consideram diferentes hipóteses e cálculos e outras metodologias que podem também gerar resultados diferentes. O DB não será responsabilizado por quaisquer erros ou omissões feitos no cálculo ou na divulgação dessas precificações, ou por quaisquer imprecisões ou falhas nas metodologias escolhidas ou ajustes. O DB não será responsável por quaisquer perdas ou danos diretos ou indiretos oriundos das informações contidas neste Relatório de Posições de Investimentos, incluindo, sem limitação, o uso destas precificações para preparação, por V.Sas., de seus próprios livros.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="667" y="81" width="119" height="15" uuid="37df6e1b-3717-41d6-baf3-25c62346a3cf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="787" y="81" width="15" height="15" uuid="c64ff981-4a36-45d2-841c-e96b54bef524"/>
+				<textFieldExpression><![CDATA[+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

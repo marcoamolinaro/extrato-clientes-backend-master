@@ -1,0 +1,2001 @@
+openapi: 3.0.3
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: 'http://localhost:8080/'
+    description: Generated server url
+paths:
+  '/extract/report/{reportName}/{reportType}':
+    get:
+      tags:
+        - extract-controller
+      operationId: report
+      parameters:
+        - name: extractFilter
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/ExtractFilter'
+        - name: reportName
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - MONTHLY_REPORT
+              - ANNUAL_REPORT
+        - name: reportType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - CONSOLIDATE
+              - ANALYTIC
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Relatorio extraido com sucesso.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.
+  /pessoa:
+    get:
+      tags:
+        - tbdw-dm-pesoa-controller
+      operationId: findExtract
+      parameters:
+        - name: tbdwDmPessoaFilter
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/TbdwDmPessoaFilter'
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageTbdwDmPessoaDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+  /company:
+    get:
+      tags:
+        - tbdw-dm-emp-controller
+      operationId: find
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TbdwDmEmp'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+  /extract/date-reference:
+    get:
+      tags:
+        - extract-controller
+      operationId: getReferenceDate
+      responses:
+        '200':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+  '/extract/{reportName}/{reportType}':
+    get:
+      tags:
+        - extract-controller
+      operationId: findExtract
+      parameters:
+        - name: extractFilter
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/ExtractFilter'
+        - name: reportName
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - MONTHLY_REPORT
+              - ANNUAL_REPORT
+              - FULL
+        - name: reportType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - CONSOLIDATE
+              - ANALYTIC
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Extratos extraidos com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageTexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.
+  '/extrato/pre/modalidade/grid':
+    get:
+      tags:
+        - tbl-mod-aplic-controller
+      operationId: find
+      parameters:
+        - name: tblModAplicFilter
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/tblModAplicFilter'
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageTblModAplicDTO'
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object    
+  '/extrato/pre/modalidade/add':         
+     add:
+      tags:
+        - tbl-mod-aplic-controller
+      operationId: find
+      parameters:
+        - name: TblModAplicDTO
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/TblModAplicDTO'
+      responses:
+        '201':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageTblModAplicDTO'
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+  '/extrato/pre/modalidade/delete/{id}':          
+     delete:
+      tags:
+        - tbl-mod-aplic-controller
+      operationId: find
+      parameters:
+        - name: id
+          in: query
+          required: true
+      responses:
+        '200':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+  '/extrato/pre/modalidade/update/{id}':         
+     update:
+      tags:
+        - tbl-mod-aplic-controller
+      operationId: find
+      parameters:
+        - name: TblModAplicDTO
+          in: query
+          required: true
+        - name: id
+          in: query
+          required: true
+      responses:
+        '200':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: object
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+  '/extrato/logderivativos':
+    get:
+      tags:
+        - extract-log-report-controller
+      operationId: find
+      parameters:
+        - name: date
+          in: query
+          required: false
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageExtractLogReportDTO'
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object    
+  '/modality':
+    get:
+      tags:
+        - tbdw-dm-modalidade-controller
+      operationId: find_1
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TbdwDmModalidade'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+  /extract/{cdEmpresa}/{cdCliente}/{cdModalidade}/{cdOperOrigem}:
+    get:
+      tags:
+        - extract-controller
+      operationId: find
+      parameters:
+        - name: cdEmpresa
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdCliente
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdModalidade
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdOperOrigem
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Extrato extraido com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Extrato não encontrado.
+  /extract/aut:
+    get:
+      tags:
+        - aut-ext-extract-controller
+      operationId: findAutExtExtractPage
+      parameters:
+        - name: extractFilter
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/AutExtExtractFilter'
+        - name: page
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Solicitações para alteração de extratos extraidas com sucesso.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PageAutExtTexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.  
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+/extract/aut/add:                
+    post:
+      tags:
+        - aut-ext-extract-controller
+      operationId: insertAutExtExtract
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutExtTexExtratoDTO'
+      responses:
+        '200':
+          description: Solicitação para adicionar extrato realizada com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AutExtTexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '406':
+          description: Já existe uma solicitação pendente para este extrato.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'  
+'/extract/aut/udate':
+    put:
+      tags:
+        - aut-ext-extract-controller
+      operationId: updateAutExtExtract
+      parameters:
+        - name: cdEmpresa
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdCliente
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdModalidade
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdOperOrigem
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutExtTexExtratoDTO'
+      responses:
+        '200':
+          description: Solicitação para alterar extrato realizada com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AutExtTexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '406':
+          description: Já existe uma solicitação pendente para este extrato.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage' 
+'/extract/aut/delete':              
+    delete:
+      tags:
+        - aut-ext-extract-controller
+      operationId: deleteAutExtExtract
+      parameters:
+        - name: cdEmpresa
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdCliente
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdModalidade
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cdOperOrigem
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Solicitação para excluir extrato realizada com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AutExtTexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '406':
+          description: Já existe uma solicitação pendente para este extrato.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+'/extract/aut/{autCdSequencial}':
+    get:
+      tags:
+        - aut-ext-extract-controller
+      operationId: findAutExtExtract
+      parameters:
+        - name: autCdSequencial
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Solicitação para alteração de extratos extraida com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AutExtTexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.        
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'  
+'/extract/aut/{autCdSequencial}/rejeitar':
+    post:
+      tags:
+        - aut-ext-extract-controller
+      operationId: rejeitarAutExtExtract
+      parameters:
+        - name: autCdSequencial
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Solicitação para alterar extrato rejeitada com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AutExtTexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.  
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'       
+        '406':
+          description: Solicitação não está pendente.       
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'    
+'/extract/aut/{autCdSequencial}/aprovar':
+    post:
+      tags:
+        - aut-ext-extract-controller
+      operationId: aprovarAutExtExtract
+      parameters:
+        - name: autCdSequencial
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Solicitação para alterar extrato aprovada com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AutExtTexExtratoDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.  
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'       
+        '406':
+          description: Solicitação não está pendente.       
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                    
+'/currency/{cdMoeda}':
+    get:
+      tags:
+        - tbdw-dm-moe-controller
+      operationId: findCurrency
+      parameters:
+        - name: cdMoeda
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Moeda extraida com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TbdwDmMoeDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+'/currency':
+    get:
+      tags:
+        - tbdw-dm-moe-controller
+      operationId: findAllActiveCurrency
+      responses:
+        '200':
+          description: Moedas extraidas com sucesso.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TbdwDmMoeDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'   
+'/modality/prod/{cdProduto}':
+    get:
+      tags:
+        - tbdw-dm-modalidade-controller
+      operationId: findProd
+      parameters:
+        - name: cdProduto
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Produto extraido com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProdDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'  
+'/modality/prod':
+    get:
+      tags:
+        - tbdw-dm-modalidade-controller
+      operationId: findAllProd
+      responses:
+        '200':
+          description: Produtos extraidos com sucesso.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProdDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.         
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'        
+'/modality/{cdProduto}':
+    get:
+      tags:
+        - tbdw-dm-modalidade-controller
+      operationId: findAllByProduto
+      responses:
+        '200':
+          description: Modalidades extraidas com sucesso.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TbdwDmModalidadeDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.         
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                        
+'/indexer/{cdIndexador}':
+    get:
+      tags:
+        - tbdw-dm-inx-controller
+      operationId: findIndexer
+      parameters:
+        - name: cdIndexador
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Indexador extraido com sucesso.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TbdwDmInxDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+'/indexer':
+    get:
+      tags:
+        - tbdw-dm-inx-controller
+      operationId: findAllIndexers
+      responses:
+        '200':
+          description: Indexadores extraidos com sucesso.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TbdwDmInxDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'     
+'/client/management/gridderivativo/geracaoextrato':
+    get:
+      tags:
+        - client-extract-management-controller
+      operationId: find
+      parameters:
+        - name: clientname
+          in: query
+          required: false
+      responses:
+        '200':
+          description: Informações recuperadas com sucesso
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PageClientExtractManagementDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                                
+'/client/management/gridderivativo/manutencaocliente':
+    get:
+      tags:
+        - client-extract-management-controller
+      operationId: find
+      parameters:
+        - name: clientname
+          in: query
+          required: false      
+      responses:
+        '200':
+          description: Informações recuperadas com sucesso
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PageClientExtractManagementDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                                
+'/client/management/add':
+    get:
+      tags:
+        - client-extract-management-controller
+      operationId: add
+      responses:
+        '200':
+          description: Informações adicionadas com sucesso
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientExtractManagementResultDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Erro ao adicionar informações.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                                
+'/client/management/delete':
+    get:
+      tags:
+        - client-extract-management-controller
+      operationId: delete
+      responses:
+        '200':
+          description: Informações excluídas com sucesso.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientExtractManagementDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Erro ao excluir informações.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                                
+'/client/management/deleteall':
+    get:
+      tags:
+        - client-extract-management-controller
+      operationId: delete
+      responses:
+        '200':
+          description: Informações excluídas com sucesso.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientExtractManagementDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Erro ao excluir informações.   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                                
+'/sistemaorigem/all':
+    get:
+      tags:
+        - tbdwdmsis-controller
+      operationId: find
+      responses:
+        '200':
+          description: Sistema de Origem extraidos com sucesso..
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TbdwDmSisDTO'
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não há informações para esta pesquisa..   
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                                
+'/derivatives/zip':
+    get:
+      tags:
+        - derivatives-controller
+      operationId: derivativesZip
+      parameters:
+        - name: derivativesFilter
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/DerivativesFilter'
+        - name: pdf
+          in: query
+          required: true
+          schema:
+            type: boolean
+        - name: excel
+          in: query
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Extrato gerado com sucesso.
+          content:
+            application/octet-stream:
+              schema:
+                  type: string
+                  format: binary
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não existem dados para essa data e cliente(s).
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'    
+'/derivatives/email':
+    get:
+      tags:
+        - derivatives-controller
+      operationId: derivativesEmail
+      parameters:
+        - name: derivativesFilter
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/DerivativesFilter'
+      responses:
+        '200':
+          description: Extrato gerado com sucesso.
+        '400':
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Não existem dados para essa data e cliente(s).
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'                                            
+components:
+  schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        Date:
+          type: string
+          format: timestamp
+        String:
+          type: string
+    ExtractFilter:
+      type: object
+      properties:
+        cdEmpresa:
+          type: string
+        cdCliente:
+          type: string
+        cdModalidade:
+          type: string
+        dtReferencia:
+          type: string
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/Sort'
+        size:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+    Sort:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean
+    TbdwDmPessoaFilter:
+      type: object
+      properties:
+        cdPessoa:
+          type: integer
+          format: int64
+        nmPessoa:
+          type: string
+        nmPessoaAbrev:
+          type: string
+        cdGcgCpf:
+          type: integer
+          format: int64
+    PageTbdwDmPessoaDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TbdwDmPessoaDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    TbdwDmPessoaDTO:
+      type: object
+      properties:
+        cdPessoa:
+          type: integer
+          format: int64
+        nmPessoa:
+          type: string
+        nmPessoaAbrev:
+          type: string
+        cdGecBr:
+          type: integer
+          format: int64
+        nmGecBr:
+          type: string
+        cdAteBr:
+          type: integer
+          format: int64
+        nmAteBr:
+          type: string
+        cdPessoaCcdb:
+          type: integer
+          format: int64
+        cdAteAl:
+          type: integer
+          format: int64
+        nmAteAl:
+          type: string
+        cdPais:
+          type: integer
+          format: int64
+        flEmpFundoDb:
+          type: string
+        cdPessoaBuba:
+          type: integer
+          format: int64
+        flTipoPessoa:
+          type: string
+        cdGcgCpf:
+          type: integer
+          format: int64
+        cdCosif:
+          type: integer
+          format: int64
+        cdNace:
+          type: integer
+          format: int64
+        dtInclusao:
+          type: string
+          format: date-time
+        vlPtrmLqd:
+          type: number
+        vlPrevMvt:
+          type: number
+        flSensibilidade:
+          type: string
+        cdTpEmpresa:
+          type: integer
+          format: int64
+        cdCatgPessoa:
+          type: integer
+          format: int64
+        codPaisOrigem:
+          type: integer
+          format: int64
+        codSitPessoa:
+          type: string
+        indPep:
+          type: string
+        vlTotAtivos:
+          type: number
+        vlFaturamento:
+          type: number
+        vlRecOperacional:
+          type: number
+        vlOutrCapFinan:
+          type: number
+        flCapFinanc:
+          type: string
+        cdParagon:
+          type: integer
+          format: int64
+        flBenefFinal:
+          type: string
+        cdContratoGlobal:
+          type: integer
+          format: int64
+        cdParagonGrupo:
+          type: string
+        flRatingParagon:
+          type: string
+        flRatingGrupoParagon:
+          type: string
+        flRatingBacen:
+          type: string
+        flRatingGrupoBacen:
+          type: string
+        dtRatingGrupoParagon:
+          type: string
+          format: date-time
+        dtRatingParagon:
+          type: string
+          format: date-time
+        flRatingArratoBacen:
+          type: string
+        flRatingArratoParagon:
+          type: string
+        dsLogradouro:
+          type: string
+        dsCidade:
+          type: string
+        cdUf:
+          type: string
+        cdCep:
+          type: integer
+          format: int64
+        dtUpdate:
+          type: string
+          format: date-time
+        flCgd:
+          type: string
+        nrLogradouro:
+          type: string
+        dsComplLogr:
+          type: string
+        dsBairro:
+          type: string
+        telefonePessoa:
+          type: string
+        dataAtualizacaoRenda:
+          type: string
+          format: date-time
+        dataFimRelacionamentoConta:
+          type: string
+          format: date-time
+        cdAssessor:
+          type: integer
+          format: int64
+        nmAssessor:
+          type: string
+        emailAssessor:
+          type: string
+    TbdwDmEmp:
+      type: object
+      properties:
+        cdEmpresa:
+          type: integer
+          format: int64
+        nomeEmpresa:
+          type: string
+        cdGrupoEmpresa:
+          type: string
+        nmGrupoEmpresa:
+          type: string
+        cdHoldingEmpresa:
+          type: string
+        nmHoldingEmpres:
+          type: string
+        cdMoedaEmp:
+          type: integer
+          format: int64
+        cdTpemp:
+          type: string
+        cdFLuxoCaixa:
+          type: integer
+          format: int64
+        nmFluxoCaixa:
+          type: string
+        dbCons:
+          type: integer
+          format: int64
+        dmpCode:
+          type: integer
+          format: int64
+    PageTexExtratoDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TexExtratoDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    TexExtratoDTO:
+      type: object
+      properties:
+        cdEmpresa:
+          type: integer
+          format: int64
+        cdCliente:
+          type: string
+        cdModalidade:
+          type: integer
+          format: int64
+        dsNegocio:
+          type: string
+        dsNegocioIngles:
+          type: string
+        cdOperOrigem:
+          type: string
+        cdContrato:
+          type: string
+        dtReferencia:
+          type: string
+          format: date
+        dtInicioOper:
+          type: string
+          format: date
+        dtVencimentoOper:
+          type: string
+          format: date
+        dtLiquidacaoOper:
+          type: string
+          format: date
+        cdGrprod:
+          type: integer
+          format: int64
+        cdFamprod:
+          type: integer
+          format: int64
+        cdProduto:
+          type: integer
+          format: int64
+        sgSistema:
+          type: string
+        sgModulo:
+          type: string
+        cdMoeda:
+          type: integer
+          format: int32
+        qtde:
+          type: string
+        vlContabil:
+          type: number
+        vlCorrigidoMe:
+          type: number
+        vlOperacaoMe:
+          type: number
+        vlOperacaoMn:
+          type: number
+        vlOperacaoEmp:
+          type: number
+        vlJurosMe:
+          type: number
+        vlJurosMn:
+          type: number
+        iiTipoContabil:
+          type: string
+        cdCgcCpf:
+          type: string
+        nmCliente:
+          type: string
+        dcEnd1:
+          type: string
+        dcEnd2:
+          type: string
+        dcEnd3:
+          type: string
+        cdPais:
+          type: integer
+          format: int64
+        nomeAosCuidados:
+          type: string
+        dsObn:
+          type: string
+        nmEmpresa:
+          type: string
+        cdFilial:
+          type: integer
+          format: int64
+        nmIndexador:
+          type: string
+        cdGarantia:
+          type: string
+        cdModulo:
+          type: string
+        moeda:
+          type: string
+        dsProduto:
+          type: string
+        displayQtde:
+          type: string
+    TbdwDmModalidade:
+      type: object
+      properties:
+        cdSeqModalidade:
+          type: integer
+          format: int64
+        cdModalidade:
+          type: integer
+          format: int64
+        dsModalidade:
+          type: string
+        cdProduto:
+          type: integer
+          format: int64
+        dsProduto:
+          type: string
+        cdGrProduto:
+          type: integer
+          format: int64
+        dsGrProduto:
+          type: string
+        cdFamProduto:
+          type: integer
+          format: int64
+        dsFamProduto:
+          type: string
+    PageTblModAplicDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TblModAplicDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    TblModAplicDTO:
+      type: object
+      properties:
+        cdSeqModAplic:
+          type: number
+          format: int64
+        cdApplication:
+          type: number
+          format: int64
+        cdModalidade:
+          type: number
+          format: int64
+        dsNegocio:
+          type: string
+      dsNegocioIngles:
+          type: string
+      displayQtde:
+          type: string
+      displayMe:   
+          type: string
+      iiTipoContabil:
+          type: string
+      dsObn:
+          type: string
+      cdSisOrig:
+          type: string
+      cdSistema:
+          type: string
+      cdModulo:
+          type: string
+      nmIndexador:
+          type: string
+      cdGarantia:
+          type: string
+    AutExtTexExtratoDTO:
+      type: object
+      properties:
+        autCdSequencial:
+          type: integer
+          format: int64
+        autDsTipoOperacao:
+          type: string
+          enum:
+            - INSERT
+            - UPDATE
+            - DELETE
+          maxLength: 6
+        autStatus:
+          type: string
+          enum:
+            - REJEITADO
+            - APROVADO
+            - PENDENTE
+          maxLength: 9
+        autCdUsuarioSolicitacao:
+          type: string
+          maxLength: 15
+        autDtSolicitacao:
+          type: string
+          format: date-time
+        autCdUsuarioAutorizacao:
+          type: string
+          maxLength: 15
+        autDtAutorizacao:
+          type: string
+          format: date-time
+        oldCdEmpresa:
+          type: integer
+          format: int64
+        oldCdCliente:
+          type: integer
+          format: int64
+        oldCdModalidade:
+          type: integer
+          format: int64
+        oldCdOperOrigem:
+          type: string
+          maxLength: 30
+        cdEmpresa:
+          type: integer
+          format: int64
+        cdCliente:
+          type: integer
+          format: int64
+        cdModalidade:
+          type: integer
+          format: int64
+        cdOperOrigem:
+          type: string
+          maxLength: 30
+        cdContrato:
+          type: string
+          maxLength: 30
+        dtReferencia:
+          type: string
+          format: date
+        dtInicioOper:
+          type: string
+          format: date
+        dtVencimentoOper:
+          type: string
+          format: date
+        dtLiquidacaoOper:
+          type: string
+          format: date
+        cdGrprod:
+          type: integer
+          format: int64
+        cdFamprod:
+          type: integer
+          format: int64
+        cdProduto:
+          type: integer
+          format: int64
+        sgSistema:
+          type: string
+          maxLength: 2
+        sgModulo:
+          type: string
+          maxLength: 2
+        cdMoeda:
+          type: integer
+          format: int64
+        quantidade:
+          type: number
+        vlContabil:
+          type: number
+        vlCorrigidoMe:
+          type: number
+        vlOperacaoMe:
+          type: number
+        vlOperacaoMn:
+          type: number
+        vlOperacaoEmp:
+          type: number
+        vlJurosMe:
+          type: number
+        vlJurosMn:
+          type: number
+        iiTipoContabil:
+          type: string
+          enum:
+            - A
+            - P
+            - C
+          maxLength: 1
+        cdCgcCpf:
+          type: string
+          maxLength: 30
+        nmCliente:
+          type: string
+          maxLength: 100
+        dcEnd1:
+          type: string
+          maxLength: 100
+        dcEnd2:
+          type: string
+          maxLength: 100
+        dcEnd3:
+          type: string
+          maxLength: 100
+        cdPais:
+          type: integer
+          format: int64
+        nomeAosCuidados:
+          type: string
+          maxLength: 35
+        dsObn:
+          type: string
+          maxLength: 50
+        nmEmpresa:
+          type: string
+          maxLength: 64
+        cdFilial:
+          type: integer
+          format: int64
+        nmIndexador:
+          type: string
+          maxLength: 20
+        cdGarantia:
+          type: string
+          maxLength: 2
+        dsNegocio:
+          type: string
+          maxLength: 60
+        dsNegocioIngles:
+          type: string
+          maxLength: 60
+        dsModalidade:
+          type: string
+          maxLength: 50
+        dsProduto:
+          type: string
+          maxLength: 30
+        nmMoeda:
+          type: string
+          maxLength: 15
+    TbdwDmMoeDTO:
+      type: object
+      properties:
+        cdMoeda:
+          type: integer
+          format: int64
+        cdMoedaIso:
+          type: string
+          maxLength: 3
+        nmMoeda:
+          type: string
+          maxLength: 15
+        tpParidadeDolar:
+          type: string
+          maxLength: 1
+        dtExclusaoPtax:
+          type: string
+          format: date
+    ProdDTO:
+      type: object
+      properties:
+        cdProduto:
+          type: integer
+          format: int64
+        dsProduto:
+          type: string
+          maxLength: 30
+          required: true
+    ExtractLogReportDTO:
+      type: object
+      properties:
+        logId:
+          type: integer
+          format: int64
+          required: true
+        cdCli:
+          type: integer
+          format: int64
+          required: true
+        nmCli:
+          type: String
+          required: false
+        agTipo:
+          type: String
+          required: false
+        execucao:
+          type: String
+          required: false
+        status:
+          type: String
+          required: false
+        descricao:
+          type: String
+          required: false
+        filename:
+          type: String
+          required: false
+        dtLog:
+          type: date
+          required: false
+    TbdwDmModalidadeDTO:
+      type: object
+      properties:
+        cdSeqModalidade:
+          type: integer
+          format: int64
+        cdModalidade:
+          type: integer
+          format: int64
+        dsModalidade:
+          type: string
+          maxLength: 50
+        cdProduto:
+          type: integer
+          format: int64
+        dsProduto:
+          type: string
+          maxLength: 35
+        cdGrProduto:
+          type: integer
+          format: int64
+        dsGrProduto:
+          type: string
+          maxLength: 25
+        cdFamProduto:
+          type: integer
+          format: int64
+        dsFamProduto:
+          type: string        
+          maxLength: 25
+    TbdwDmInxDTO:
+      type: object
+      properties:
+        cdIndexador:
+          type: integer
+          format: int64
+        nmIndexador:
+          type: string
+          maxLength: 35
+        flTipoInx:
+          type: string
+          maxLength: 3
+        cdMoedaDe:
+          type: integer
+          format: int64
+        cdMoedaPara:
+          type: integer
+          format: int64
+        flTipoParidade:
+          type: string
+          maxLength: 1
+        cdTppe:
+          type: string
+          maxLength: 4
+        flTipoParidadeMtm:
+          type: string
+          maxLength: 1
+        cdInxCeri:
+          type: integer
+          format: int64    
+    PageClientExtractManagementDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientExtractManagementDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
+    ClientExtractManagementDTO:
+      type: object
+      properties:
+        isInsertedOnExtract:
+          type: boolean
+        cdCliente:
+          type: string
+        nomeCliente:
+          type: string
+        cpfCnpjCliente:
+          type: string
+        vrAgendamento:
+          type: string
+        vrPeriodo:
+          type: string
+        nmAteBr:
+          type: string
+        vrHorario:
+          type: string
+        vrDiaSemana:
+          type: string
+        dtRef:
+          type: string
+        vrTipoRelatorio:
+          type: string
+        vrEmailFlag:
+          type: string
+    ClientExtractManagementResultDTO:
+        msgErros:
+          type: array
+        clientDTOs:
+          type: array
+    TbdwDmSisDTO:
+        cdSeqSisOrig:
+          type: integer
+          format: int32
+        cdSisOrig:
+          type: string
+        nmSistema:        
+          type: string
+    DerivativesFilter:
+      type: object
+      properties:
+        data:
+          type: string
+          format: date
+        cdClientes:
+          type: array
+          items:
+            type: integer
+            minimum: 0
+            maximum: 9999999
+    AutExtExtractFilter:
+      type: object
+      properties:
+        autStatus:
+          type: string
+          enum:
+            - APROVADO
+            - PENDENTE
+            - REJEITADO
+        dtReferencia:
+          type: string
+          format: date
+    PageAutExtTexExtratoDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutExtTexExtratoDTO'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        numberOfElements:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        empty:
+          type: boolean
